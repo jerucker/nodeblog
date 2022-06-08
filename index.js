@@ -82,7 +82,7 @@ app.post("/post/store", (req, res) => {
   image.mv(path.resolve(__dirname, "public/img", image.name), async (error) => {
     await Post.create(req.body, (error, post) => {
       // Note to see the data the form must be - application/x-www-form-urlencoded
-
+      // branch text
       res.redirect("/");
       console.log(req.body);
     });
