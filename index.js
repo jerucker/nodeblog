@@ -3,7 +3,6 @@ const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const { request } = require("http");
 const fileUpload = require("express-fileupload");
-
 const app = express();
 const path = require("path");
 const ejs = require("ejs");
@@ -14,6 +13,10 @@ const mongoose = require("mongoose");
 const Post = require("./database/models/Post");
 const { error } = require("console");
 const port = 3071;
+
+app.listen(port, () => {
+  console.log(`Server started on port ${port}`);
+});
 
 // Mongodb Connection
 mongoose.connect("mongodb://localhost:27017/blogejs-dev01");
@@ -38,74 +41,21 @@ const validateMiddleWare = (req, res, next) => {
 
 // BodyParser
 //Here we are configuring express to use body-parser as middle-ware.
-
+// Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());
-
 // Must run after fileUpload
 app.use("/post/store", validateMiddleWare);
 
-// Home Page
-app.get("/", async (req, res) => {
-  // Code below will find all of the post - await Post.find({})
-  const posts = await Post.find({});
-  console.log(posts);
+// Route Controllers
+const newPostController = require("./controllers/newPost");
+const homeController = require("./controllers/homePage");
+const storePostController = require("./controllers/storePost");
+const getpostController = require("./controllers/getPost");
 
-  // This will show you the post in the terminal
-  // console.log(posts);
-
-  res.render("index", {
-    posts: posts,
-  });
-});
-
-// app.get("", (req, res) => {
-//   res.render("index", { text: "EJS Blog" });
-// });
-
-app.get("/about", (req, res) => {
-  res.render("about", { text: "About Page" });
-});
-
-// The id will accept a wild card value
-app.get("/post/:id", async (req, res) => {
-  const posts = await Post.findById(req.params.id);
-  res.render("post", {
-    posts,
-  });
-});
-
-app.get("/create", (req, res) => {
-  res.render("create", { text: "Create Post" });
-});
-
-app.get("/contact", (req, res) => {
-  res.render("contact", { text: "Contact Page" });
-});
-
-app.listen(port, () => {
-  console.log(`Server started on port ${port}`);
-});
-
-//  Store Post Data to data base
-// After the user submit a new post he or she is redirected to the home page
-app.post("/post/store", async (req, res) => {
-  // The express upload adds the files property
-  let image = req.files.image;
-  // mv is the move image into the directory of our choice
-  image.mv(path.resolve(__dirname, "public/img", image.name), async (error) => {
-    await Post.create({
-      // ... means that we are making a copy of the opbject req.body and it properties
-      ...req.body,
-      image: "/img/" + image.name,
-      // Note to see the data the form must be - application/x-www-form-urlencoded
-      // Changing save code for saving image to database
-    });
-    console.log(req.body);
-    res.redirect("/");
-  });
-  // The object req.body will save the information coming from the browsers form on the
-  //  new post create page
-  // Create a new document for the database
-});
+//----------------------------------------------------------
+app.get("/", homeController);
+app.get("/post/:id", getpostController);
+app.get("/create", newPostController);
+app.get("/post/store", storePostController);
