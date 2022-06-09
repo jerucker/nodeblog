@@ -58,4 +58,4 @@ const getpostController = require("./controllers/getPost");
 app.get("/", homeController);
 app.get("/post/:id", getpostController);
 app.get("/create", newPostController);
-app.get("/post/store", storePostController);
+app.post("/post/store", storePostController);
