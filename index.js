@@ -30,14 +30,16 @@ app.set("layout", "./layouts/mainlayout");
 app.set("view engine", "ejs");
 
 // Form validation middleware
-const validateMiddleWare = (req, res, next) => {
-  if (req.files == null || req.body.title == null) {
-    return res.redirect("/create");
-  }
-  // next() is need to tell the middleware to move on to the next action
-  // other wise the app will hang
-  next();
-};
+const validateMiddleWare = require("./middleware/validation");
+
+// const validateMiddleWare = (req, res, next) => {
+//   if (req.files == null || req.body.title == null) {
+//     return res.redirect("/create");
+//   }
+//   // next() is need to tell the middleware to move on to the next action
+//   // other wise the app will hang
+//   next();
+// };
 
 // BodyParser
 //Here we are configuring express to use body-parser as middle-ware.
@@ -53,9 +55,13 @@ const newPostController = require("./controllers/newPost");
 const homeController = require("./controllers/homePage");
 const storePostController = require("./controllers/storePost");
 const getpostController = require("./controllers/getPost");
+const newUserController = require("./controllers/newUser");
+const storeUserController = require("./controllers/storeUser");
 
-//----------------------------------------------------------
+//Routes aka urls----------------------------
 app.get("/", homeController);
 app.get("/post/:id", getpostController);
 app.get("/create", newPostController);
 app.post("/post/store", storePostController);
+app.get("/auth/register", newUserController);
+app.post("/users/register", storeUserController);
