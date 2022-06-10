@@ -55,13 +55,26 @@ const newPostController = require("./controllers/newPost");
 const homeController = require("./controllers/homePage");
 const storePostController = require("./controllers/storePost");
 const getpostController = require("./controllers/getPost");
+// Renders new user page
 const newUserController = require("./controllers/newUser");
+// Stores new user info
 const storeUserController = require("./controllers/storeUser");
+// Renders to render login page
+const loginController = require("./controllers/login");
+
+// Check login user creditails
+const loginUserController = require("./controllers/loginUser");
 
 //Routes aka urls----------------------------
 app.get("/", homeController);
 app.get("/post/:id", getpostController);
 app.get("/create", newPostController);
 app.post("/post/store", storePostController);
+// Registraion user Route
 app.get("/auth/register", newUserController);
+// Stores new usier info
 app.post("/users/register", storeUserController);
+// Login Page Route
+app.get("/auth/login", loginController);
+// Check login creditial route
+app.post("/user/login", loginUserController);

@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
+const bcrypt = require("bcrypt");
+
 const UserSchema = new mongoose.Schema({
   // This maked the username required & unique
   username: {
@@ -19,7 +21,8 @@ const UserSchema = new mongoose.Schema({
 // encrypt passwords
 UserSchema.pre("save", function (next) {
   const user = this;
-  bcrypt.hash(user.password, 100, (error, hash) => {
+  // Hash time will slow server respone down I changed it from 100 to 10
+  bcrypt.hash(user.password, 10, (error, hash) => {
     user.password = hash;
     next();
   });
