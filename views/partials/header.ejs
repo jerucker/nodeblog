@@ -18,16 +18,26 @@
         <li class="nav-item">
           <a class="nav-link px-lg-3 py-3 py-lg-4" href="/">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link px-lg-3 py-3 py-lg-4" href="/about">About</a>
-        </li>
-
+        <!-- Only if user logged in will they see this liknk-->
+        <!-- the loggedIn varibale is accessable in the index.js page -->
+        <% if(loggedIn) {%>
         <li class="nav-item">
           <a class="nav-link px-lg-3 py-3 py-lg-4" href="/create"
             >Create Post</a
           >
         </li>
 
+        <li class="nav-item">
+          <a class="nav-link px-lg-3 py-3 py-lg-4" href="/auth/logout"
+            >Log Out</a
+          >
+        </li>
+        <% } %>
+
+        <!-- Only if user Not logged will they see this liknk-->
+        <!-- the loggedIn varibale is accessable in the index.js page -->
+
+        <% if(!loggedIn) { %>
         <li class="nav-item">
           <a class="nav-link px-lg-3 py-3 py-lg-4" href="/auth/login">Login </a>
         </li>
@@ -37,10 +47,7 @@
             >New User</a
           >
         </li>
-
-        <li class="nav-item">
-          <a class="nav-link px-lg-3 py-3 py-lg-4" href="/contact">Contact</a>
-        </li>
+        <% } %>
       </ul>
     </div>
   </div>

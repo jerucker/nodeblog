@@ -5,10 +5,10 @@ const { error } = require("console");
 
 module.exports = (req, res) => {
   User.create(req.body, (error, user) => {
-    console.log(error);
     // If there is an error the page will redirect back to the regaister form
     //  pathe /auth/register
     if (error) {
+      console.log(error);
       return res.redirect("/auth/register");
     }
 

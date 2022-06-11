@@ -15,6 +15,8 @@ module.exports = (req, res) => {
       bcrypt.compare(password, user.password, (error, same) => {
         // If same is true we will redirect to home page (error,same)
         if (same) {
+          // This assign a session to logged in users
+          req.session.userID = user._id;
           res.redirect("/");
           //  If not he same the login page will reload
         } else {
