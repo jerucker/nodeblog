@@ -11,12 +11,31 @@
   </div>
 </header>
 
-
-<!-- Registration Form -->
+<!-- Main Content-->
 
 <div class="container">
   <div class="row">
     <div class="col-md-8 offset-md-2">
+<!--  Form Errors-->
+<!--  1. Look for errors-->
+<!--  errors variable comes from the newUser.js req.session-->
+<% if (errors != null && errors.length >0 ) {%>
+  <!-- 2nd List Errors-->
+    <ul class="list-group">
+      <!-- for loop to go though errors array-->
+        <% for(var i = 0; i < errors.length; i++) { %>
+            <!-- list-group-item-danger list errors in red -->
+          <li class="list-group-item list-group-item-danger">
+              <%= errors[i] %>
+          </li>
+       <% } %>   
+    </ul>
+<% } %>
+<!-- ------------------- -->
+
+<!-- Registration Form -->
+
+
      
       <form
         action="/users/register"
@@ -28,6 +47,7 @@
         <!-- --------------------------------------------------------------- -->
 
         <!-- Username -->
+        <!-- the values for username & password comes from the newUser.js -->
         <div class="control-group">
           <div class="form-group floating-label-form-group controls">
             <label>User Name</label>
@@ -37,6 +57,7 @@
               id="username"
               placeholder="User Name"
               class="form-control"
+              value=" <%= username %> "
             />
           </div>
         </div>
@@ -50,6 +71,7 @@
               name="password"
               id="password" 
               class="form-control"
+              value=" <%= password %>"
             />
           </div>
         </div>

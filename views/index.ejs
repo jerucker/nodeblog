@@ -27,7 +27,9 @@
         </a>
         <p class="post-meta">
           Posted by
-          <a href="#"> <%= posts[i].username %> </a>
+          <!-- userid connects the user to the post from -->
+          <!-- homePage.js controller & storePost.js controller -->
+          <a href="#"> <%= posts[i].userid.username %> </a>
           on <%= posts[i].datePosted.toDateString() %>
         </p>
       </div>

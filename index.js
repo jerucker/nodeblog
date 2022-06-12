@@ -12,6 +12,7 @@ const expressSession = require("express-session");
 const { error } = require("console");
 // Pull in database model to get data from form to database
 const Post = require("./database/models/Post");
+const flash = require("connect-flash");
 
 // Global logged in value - It is empty now
 global.loggedIn = null;
@@ -24,6 +25,7 @@ app.listen(port, () => {
 
 // Mongodb Connection
 mongoose.connect("mongodb://localhost:27017/blogejs-dev01");
+// Remote Connection
 
 // Static Files
 app.use(express.static("public"));
@@ -59,6 +61,10 @@ app.use(
     saveUninitialized: true,
   })
 );
+
+// Connect flash
+app.use(flash());
+
 // Must go after the expressSession middleware
 // userID will only be called after the expressSession Middleware
 // Get the session userid from the user and assigns it to the loggedIn variable

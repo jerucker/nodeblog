@@ -12,6 +12,11 @@ module.exports = async (req, res) => {
         // ... means that we are making a copy of the opbject req.body and it properties
         ...req.body,
         image: "/img/" + image.name,
+        // this will assisign a userid to each post
+        // created from the Post.js database/model this userid is populated by the sessions
+        // this is from the loginUser.js file look and you will see the userID from the
+        // sessions
+        userid: req.session.userID,
         // Note to see the data the form must be - application/x-www-form-urlencoded
         // Changing save code for saving image to database
       });
