@@ -18,6 +18,7 @@ const flash = require("connect-flash");
 global.loggedIn = null;
 
 // Localhost Port
+
 // const port = 3071;
 // app.listen(port, () => {
 //   console.log(`Server started on port ${port}`);
@@ -37,6 +38,7 @@ app.listen(port, () => {
 mongoose.connect(
   "mongodb+srv://nodejsblog:Gt6CunRWnIB6@nodeblog001.y6oyzmn.mongodb.net/nodeblog001",
   { useNewUrlParser: true }
+);
 // );
 // );
 
