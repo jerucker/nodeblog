@@ -19,26 +19,23 @@ global.loggedIn = null;
 
 // Localhost Port
 
-// const port = 3071;
-// app.listen(port, () => {
-//   console.log(`Server started on port ${port}`);
-// });
-
-// Port to run on Heroku
-let port = process.env.PORT;
-if (port == null || port == "") port = 4000;
-
+const port = 3071;
 app.listen(port, () => {
-  console.log("App listening...");
+  console.log(`Server started on port ${port}`);
 });
 
+// Port to run on Heroku
+// let port = process.env.PORT;
+// if (port == null || port == "") port = 4000;
+
+// app.listen(port, () => {
+//   console.log("App listening...");
+// });
+
 // Mongodb Connection
-// mongoose.connect("mongodb://localhost:27017/blogejs-dev01");
-// Remote Connection
-mongoose.connect(
-  "mongodb+srv://nodejsblog:Gt6CunRWnIB6@nodeblog001.y6oyzmn.mongodb.net/nodeblog001",
-  { useNewUrlParser: true }
-);
+mongoose.connect("mongodb://localhost:27017/blogejs-dev01");
+
+// );
 // );
 // );
 
